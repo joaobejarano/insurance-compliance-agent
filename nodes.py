@@ -92,36 +92,29 @@ def agent_extract(state: InsuranceState) -> Command[Literal["agent_validate"]]:
         {
             "role": "system",
             "content": """You are an insurance document data extractor.
-Your job: extract ALL structured data from the insurance document.
-ALWAYS use the extract_policy_data tool. Never skip extraction.""",
+        Your job: extract ALL structured data from the insurance document.
+        ALWAYS use the extract_policy_data tool with the PDF file path provided by the user.
+        Look for the file path in the user's message.""",
         },
         *state["messages"],
     ])
 
+    messages_to_add = [response]
     extracted = None
-    messages_to_add = [response]  # sempre salva o AIMessage
-
     if response.tool_calls:
         tool_call = response.tool_calls[0]
         tool_result = extract_policy_data.invoke(tool_call["args"])
         extracted = tool_result
-
-        # ✅ ToolMessage obrigatório após todo tool_call
+        # FIX: adiciona ToolMessage (bug que você já corrigiu!)
+        from langchain_core.messages import ToolMessage
         messages_to_add.append(
-            ToolMessage(
-                content=str(tool_result),
-                tool_call_id=tool_call["id"],
-            )
+            ToolMessage(content=tool_result, tool_call_id=tool_call["id"])
         )
 
     return Command(
-        update={
-            "extracted_data": extracted,
-            "messages": messages_to_add,
-        },
+        update={"extracted_data": extracted, "messages": messages_to_add},
         goto="agent_validate",
     )
-
 # ═══════════════════════════════════════════════════════
 # NÓ 3: AGENT_VALIDATE (ReAct com tool de compliance)
 # Verifica os dados contra regras regulatórias

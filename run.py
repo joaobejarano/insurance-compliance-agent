@@ -27,33 +27,8 @@ def main():
     config = {"configurable": {"thread_id": "policy-review-001"}}
     
     # ── 3. Documento de teste ──
-    # Simula um usuário mandando um documento de apólice
-    test_document = """
-    INSURANCE POLICY DOCUMENT
-    
-    Policy Number: POL-2024-00789
-    Policyholder: Acme Corp
-    Number of Employees: 120
-    
-    Coverage Type: General Liability
-    Coverage Amount: $2,000,000
-    Deductible: $10,000
-    Annual Premium: $12,400
-    
-    Effective Date: March 15, 2024
-    Expiration Date: March 15, 2025
-    
-    Additional Coverages:
-    - Property Damage
-    - Product Liability
-    
-    Exclusions:
-    - Cyber Liability
-    - Workers Compensation
-    
-    This policy is issued subject to all terms, conditions, 
-    and exclusions contained herein.
-    """
+    # Agora aponta pro PDF real em vez de texto hardcoded
+    test_document = "Please analyze the insurance policy document at: test_policy.pdf"
     
     # ── 4. Primeira execução: roda até o interrupt ──
     print("\n" + "=" * 60)
@@ -98,6 +73,19 @@ def main():
     if report:
         print(f"\n📊 Report:")
         print(f"   {report[:300]}...")
+
+    # ── Mostra o state completo (sem truncar) ──
+    print("\n" + "=" * 60)
+    print("📋 FULL STATE DUMP")
+    print("=" * 60)
+    
+    for key in ["classification", "extracted_data", "compliance_result", "report"]:
+        value = state.values.get(key)
+        if value:
+            print(f"\n{'─' * 40}")
+            print(f"🔑 {key}:")
+            print(f"{'─' * 40}")
+            print(value)
     
     # ── 6. Simula decisão humana ──
     print("\n" + "=" * 60)
