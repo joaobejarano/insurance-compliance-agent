@@ -1,0 +1,42 @@
+[
+    {
+        "id": "TC-001",
+        "name": "Standard liability policy - Acme Manufacturing",
+        "difficulty": "easy",
+        "description": "Happy path: standard policy with known compliance gaps",
+        "input": {
+            "pdf_path": "test_policy.pdf",
+            "user_message": "Please analyze the insurance policy document at: test_policy.pdf"
+        },
+        "expected": {
+            "classification": {
+                "type": "policy",
+                "urgency": "low"
+            },
+            "extraction": {
+                "policy_number": "POL-2024-00789",
+                "holder_name": "Acme Manufacturing Corp",
+                "holder_employees": 120,
+                "business_type": "Manufacturing",
+                "coverage_type": "General Liability",
+                "coverage_amount": "$2,000,000",
+                "deductible": "$10,000",
+                "premium_annual": "$12,400",
+                "effective_date": "2024-03-15",
+                "expiry_date": "2025-03-15",
+                "additional_coverages": [
+                    "Property Damage",
+                    "Product Liability"
+                ],
+                "exclusions": [
+                    "Cyber Liability",
+                    "Workers Compensation"
+                ]
+            },
+            "compliance": {
+                "status": "FAIL",
+                "critical_gaps": ["Workers Compensation"]
+            }
+        }
+    }
+]

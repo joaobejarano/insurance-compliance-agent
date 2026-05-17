@@ -1,0 +1,25 @@
+
+════════════════════════════════════════════════════════════
+EVAL REPORT — Insurance Compliance Agent
+════════════════════════════════════════════════════════════
+
+── TC-001: Standard liability policy - Acme Manufacturing (easy) ──
+
+  📄 Extraction: 12/12 fields (100.0%)
+
+  📋 Classification: ✅ type=policy ✅ urgency=low
+
+  ⏱️  Latency: 9.0s total
+     extraction: 7.3s
+     classification: 1.7s
+
+
+════════════════════════════════════════════════════════════
+SUMMARY
+════════════════════════════════════════════════════════════
+  Mean Extraction Accuracy:     100.0%
+  Mean Classification Accuracy: 100.0%
+  Mean Latency:                 9.0s per document
+
+  Test cases: 1
+════════════════════════════════════════════════════════════

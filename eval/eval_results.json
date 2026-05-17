@@ -1,0 +1,113 @@
+[
+  {
+    "test_case": {
+      "id": "TC-001",
+      "name": "Standard liability policy - Acme Manufacturing",
+      "difficulty": "easy"
+    },
+    "extraction": {
+      "field_results": {
+        "policy_number": {
+          "match": true,
+          "expected": "POL-2024-00789",
+          "actual": "POL-2024-00789"
+        },
+        "holder_name": {
+          "match": true,
+          "expected": "Acme Manufacturing Corp",
+          "actual": "Acme Manufacturing Corp"
+        },
+        "holder_employees": {
+          "match": true,
+          "expected": 120,
+          "actual": 120
+        },
+        "business_type": {
+          "match": true,
+          "expected": "Manufacturing",
+          "actual": "Manufacturing - Electronic Components"
+        },
+        "coverage_type": {
+          "match": true,
+          "expected": "General Liability",
+          "actual": "Commercial General Liability"
+        },
+        "coverage_amount": {
+          "match": true,
+          "expected": "$2,000,000",
+          "actual": "$2,000,000"
+        },
+        "deductible": {
+          "match": true,
+          "expected": "$10,000",
+          "actual": "$10,000"
+        },
+        "premium_annual": {
+          "match": true,
+          "expected": "$12,400",
+          "actual": "$12,400"
+        },
+        "effective_date": {
+          "match": true,
+          "expected": "2024-03-15",
+          "actual": "2024-03-15"
+        },
+        "expiry_date": {
+          "match": true,
+          "expected": "2025-03-15",
+          "actual": "2025-03-15"
+        },
+        "additional_coverages": {
+          "match": true,
+          "expected": [
+            "Property Damage",
+            "Product Liability"
+          ],
+          "actual": [
+            "Property Damage Liability",
+            "Product Liability - Completed Operations",
+            "Personal and Advertising Injury",
+            "Medical Payments (per person): $5,000"
+          ]
+        },
+        "exclusions": {
+          "match": true,
+          "expected": [
+            "Cyber Liability",
+            "Workers Compensation"
+          ],
+          "actual": [
+            "Cyber Liability and Data Breach",
+            "Workers Compensation and Employer's Liability",
+            "Professional Errors and Omissions",
+            "Pollution and Environmental Damage",
+            "War, Terrorism, and Nuclear Hazards"
+          ]
+        }
+      },
+      "passed": 12,
+      "total": 12,
+      "accuracy": 1.0
+    },
+    "classification": {
+      "type": {
+        "match": true,
+        "expected": "policy",
+        "actual": "policy"
+      },
+      "urgency": {
+        "match": true,
+        "expected": "low",
+        "actual": "low"
+      },
+      "accuracy": 1.0
+    },
+    "latency": {
+      "steps": {
+        "extraction": 7.325756311416626,
+        "classification": 1.6900358200073242
+      },
+      "total": 9.01579213142395
+    }
+  }
+]
