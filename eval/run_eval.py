@@ -119,6 +119,48 @@ or any compliance violation that requires immediate human attention."""
 
     return result
 
+def upload_to_langsmith(dataset: list[dict]):
+    """Sobe o golden dataset pro LangSmith (opcional)."""
+    try:
+        from langsmith import Client
+        
+        client = Client()
+        
+        # Cria ou pega o dataset existente
+        ds_name = "insurance-policy-extraction"
+        try:
+            ls_dataset = client.create_dataset(ds_name)
+            print(f"\n☁️  Created LangSmith dataset: {ds_name}")
+        except Exception:
+            # Dataset já existe
+            datasets = list(client.list_datasets(dataset_name=ds_name))
+            if datasets:
+                ls_dataset = datasets[0]
+                print(f"\n☁️  Using existing LangSmith dataset: {ds_name}")
+            else:
+                print("\n⚠️  Could not create or find LangSmith dataset")
+                return
+        
+        # Adiciona exemplos
+        for case in dataset:
+            client.create_example(
+                inputs=case["input"],
+                outputs=case["expected"],
+                dataset_id=ls_dataset.id,
+                metadata={
+                    "id": case["id"],
+                    "name": case["name"],
+                    "difficulty": case.get("difficulty", "unknown"),
+                },
+            )
+        
+        print(f"   Uploaded {len(dataset)} examples")
+        
+    except ImportError:
+        print("\n⚠️  langsmith not installed. Run: pip install langsmith")
+    except Exception as e:
+        print(f"\n⚠️  LangSmith upload failed: {e}")
+
 
 def main():
     """Roda o eval pipeline completo."""
@@ -188,6 +230,8 @@ def main():
     with open(results_path, "w") as f:
         json.dump(all_results, f, indent=2, default=str)
     print(f"📊 Detailed results saved to: {results_path}")
+
+    upload_to_langsmith(dataset)
 
 
 if __name__ == "__main__":
