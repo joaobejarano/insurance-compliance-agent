@@ -1,3 +1,29 @@
-venv
-__pycache__
+# Environment
 .env
+venv/
+.venv/
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+dist/
+build/
+
+# Eval outputs (regenerated on each run)
+eval/eval_report.txt
+eval/eval_results.json
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Docker
+*.log
