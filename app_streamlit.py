@@ -91,7 +91,7 @@ with st.sidebar:
     
     st.divider()
     st.caption("Built with LangGraph + PyMuPDF + OpenAI")
-    st.caption("Sierra Studio — AI Engineer Portfolio")
+    st.caption("AI Engineer Portfolio")
 
 
 # ═══════════════════════════════════════════════════════
